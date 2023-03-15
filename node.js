@@ -8,8 +8,13 @@ const sizeOf = require('image-size');
 
 
 
+
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
+
+
+app.use(express.static("public"));
+
 
 app.post("/api/pngtojpg", upload.single("image"), async (req, res) => {
   console.log("Received file:", req.file);
