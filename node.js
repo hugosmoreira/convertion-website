@@ -11,23 +11,19 @@ const sizeOf = require('image-size');
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
 
-app.post('/api/pngtojpg', upload.single('image'), async (req, res) => {
+app.post("/api/pngtojpg", upload.single("image"), async (req, res) => {
+  console.log("Received file:", req.file);
+
   try {
-    if (!req.file) {
-      return res.status(400).send({ error: 'No image provided.' });
-    }
+    const inputBuffer = fs.readFileSync("path/to/input.png");
+    const outputBuffer = await sharp(inputBuffer)
+      .toFormat("jpeg")
+      .toBuffer();
 
-    if (req.file.mimetype !== 'image/png') {
-      return res.status(400).send({ error: 'File is not a PNG image.' });
-    }
-
-    const jpgBuffer = await sharp(req.file.buffer).toFormat('jpeg').toBuffer();
-    res.setHeader('Content-Type', 'image/jpeg');
-    res.setHeader('Content-Disposition', 'attachment; filename=converted.jpg');
-    res.send(jpgBuffer);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ error: 'Image conversion failed.' });
+    fs.writeFileSync("path/to/output.jpg", outputBuffer);
+    console.log("PNG to JPG conversion successful!");
+  } catch (error) {
+    console.error("Error converting PNG to JPG:", error);
   }
 });
 

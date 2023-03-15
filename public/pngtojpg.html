@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PNG to JPG Converter</title>
+  
   <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body id="pngtojpg-page">
   <div class="container">
     <header>
       <h1>PNG to JPG Converter</h1>
       <p>Select a PNG image to convert:</p>
     </header>
-    <form id="conversion-form">
+    <form id="conversion-form" data-conversion="pngtojpg">
+      <label for="image-input" id="choose-file-label">Choose file</label>
+      <br />
       <input type="file" id="image-input" accept="image/png">
       <button type="submit" id="convert-button">Convert to JPG</button>
     </form>
