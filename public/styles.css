@@ -105,3 +105,12 @@ button#convert-button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
+
+#page-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
